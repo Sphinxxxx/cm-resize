@@ -5,7 +5,7 @@ Based on an  [example](https://jsfiddle.net/mindplay/rs2L2vtb/2/) by [Rasmus Sch
 
 ## Usage ##
 
-    var myCodeMirror = CodeMirror.fromTextArea(...);
+    var myCodeMirror = CodeMirror.fromTextArea(...); //..or some other way to create a CodeMirror instance
     cmResize(myCodeMirror);
 
 ## Demo ##
