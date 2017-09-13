@@ -44,7 +44,7 @@ function cmResize(cm, config) {
               h = resizeH ? Math.max(minH, (startH + e.clientY - startY)) : null;
         cm.setSize(w, h);
         
-        //Leave room for our custom drag handle when only one scrollbar is visible:
+        //Leave room for our default drag handle when only one scrollbar is visible:
         if(!config.handle) {
             cmElement.querySelector('.CodeMirror-vscrollbar').style.bottom = '15px';
             cmElement.querySelector('.CodeMirror-hscrollbar').style.right = '15px';
@@ -54,7 +54,7 @@ function cmResize(cm, config) {
     function onRelease(e) {
         e.preventDefault();
         
-        document.body.removeEventListener("mousemove", onDrag);
+        window.removeEventListener("mousemove", onDrag);
         window.removeEventListener("mouseup", onRelease);
     }
 
@@ -67,7 +67,7 @@ function cmResize(cm, config) {
         startH = cmElement.offsetHeight;
         startW = cmElement.offsetWidth;
 
-        document.body.addEventListener("mousemove", onDrag);
+        window.addEventListener("mousemove", onDrag);
         window.addEventListener("mouseup", onRelease);
     });
 }
