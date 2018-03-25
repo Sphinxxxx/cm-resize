@@ -5,82 +5,21 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.min.js'></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.min.js"></script>
+
+        <link href="./styles.css" rel="stylesheet" />
         <script src="../dist/cm-resize.js"></script>
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.min.css" />
-        <style>
-            .container {
-              display: inline-block; /* or table */
-              position: relative;
-            }
-            
-            .handle {
-              position: absolute;
-              bottom: 0;
-              right: 0;
-              z-index: 99;
-              width: 3em;
-              height: 3em;
-              margin: -1.5em;
-              border: .5em solid #bada55;
-              border-radius: 100%;
-              box-sizing: border-box;
-              background: tomato;
-              opacity: .7;
-              cursor: pointer;
-              text-align: center;
-            }
-            .handle::after {
-              content: '⇕';
-              color: black;
-              font-size: 2em;
-              line-height: .9;
-            }
-            .handle#handle-w {
-              bottom: 50%;
-            }
-            .handle#handle-w::after {
-              content: '⇔';
-            }
-            .handle#handle-h {
-              right: 50%;
-            }
-            
-            /* Not important */
-            body {
-              background: #444;
-              color: #eee;
-              font-family: sans-serif;
-            }
-            body a {
-              color: skyblue;
-            }
-            
-            .CodeMirror, .container {
-              display: inline-block;
-              vertical-align: top;
-              margin: .5em;
-            }
-            .CodeMirror .CodeMirror, .container .CodeMirror {
-              display: block;
-              margin: 0;
-            }
-        </style>
     </head>
     <body>
-        <h1><a href="https://github.com/Sphinxxxx/cm-resize">cm-resize</a> demo</h1>
+        <h1><a href="https://github.com/Sphinxxxx/cm-resize" target="_blank">cm-resize</a> demo</h1>
         <main>
+            <textarea id="text1">Example with the default handle.&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;...</textarea>
         
-            <textarea id="text1">Example with the default handle.&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;...</textarea>
+            <textarea id="text2">Example with two handles,&#10;custom cssClass and resizableWidth/Height only.&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;...</textarea>
         
-            <div class="container">
-                <textarea id="text2">Example with custom handles,&#10;and resizableWidth/Height only.&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;...</textarea>
-        
-                <div id="handle-w" class="handle"></div>
-                <div id="handle-h" class="handle"></div>
-            </div>
-        
+            <div id="joystick3"></div>
+            <textarea id="text3">Example with a custom handle element.&#10;This allows for handle UI outside of the editor area.&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;...</textarea>
         </main>
 
         <script >
@@ -88,16 +27,25 @@
             var cm1 = CodeMirror.fromTextArea(document.querySelector('#text1'));
             cmResize(cm1);
             
-            //Custom
+            
+            //Custom cssClass
             var cm2 = CodeMirror.fromTextArea(document.querySelector('#text2'));
             cmResize(cm2, {
-                handle: document.querySelector('#handle-w'),
                 resizableHeight: false,
+                cssClass: 'handle handle2 handle-w',
             });
             cmResize(cm2, {
-                handle: document.querySelector('#handle-h'),
                 resizableWidth: false,
-                //resizableHeight: false,
+                cssClass: 'handle handle2 handle-h',
+            });
+            
+            
+            //Custom handle
+            var cm3 = CodeMirror.fromTextArea(document.querySelector('#text3'));
+            cmResize(cm3, {
+                handle: document.querySelector('#joystick3'),
+                //resizableWidth: true,
+                //resizableHeight: true,
                 //minWidth: 200,
                 //minHeight: 100,
                 //cssClass: 'cm-resize-handle',

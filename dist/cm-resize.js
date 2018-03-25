@@ -1,5 +1,5 @@
 /*!
- * cm-resize v0.2.1
+ * cm-resize v0.2.2
  * https://github.com/Sphinxxxx/cm-resize
  *
  * Copyright 2017-2018 Andreas Borgen (https://github.com/Sphinxxxx)

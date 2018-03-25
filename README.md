@@ -21,7 +21,7 @@ https://codepen.io/Sphinxxxx/pen/dVPXdX
 * ..or client-side `<script>`:
 
 ```html
-<script src='https://unpkg.com/cm-resize'></script>
+<script src="https://unpkg.com/cm-resize"></script>
 ```
 
 #### Usage

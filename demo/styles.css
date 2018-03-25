@@ -1,0 +1,88 @@
+@charset "UTF-8";
+.handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 99;
+  width: 3em;
+  height: 3em;
+  margin: -1.5em;
+  border: .5em solid #bada55;
+  border-radius: 100%;
+  box-sizing: border-box;
+  background: tomato;
+  cursor: pointer;
+  text-align: center;
+  opacity: .4;
+}
+.handle::after {
+  content: '⇕';
+  color: black;
+  font-size: 2em;
+  line-height: .95;
+}
+.handle:hover {
+  opacity: .7;
+}
+.handle.handle-w {
+  bottom: 50%;
+  transform: rotate(-90deg);
+  cursor: ew-resize;
+}
+.handle.handle-h {
+  right: 50%;
+  cursor: ns-resize;
+}
+
+.handle2 {
+  margin: -1em;
+  border-radius: 100% 100% 0 0;
+}
+.handle2::after {
+  font-size: 1.5em;
+  line-height: 1.1;
+}
+.handle2.handle-w {
+  margin-bottom: -1.5em;
+}
+.handle2.handle-h {
+  margin-right: -1.5em;
+}
+
+#joystick3 {
+  display: block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 2em auto 1em auto;
+  color: dodgerblue;
+  background-image: linear-gradient(45deg, transparent 33%, currentColor 0, currentColor 67%, transparent 0), linear-gradient(135deg, transparent 33%, currentColor 0, currentColor 67%, transparent 0);
+  transform: rotate(45deg);
+  cursor: move;
+}
+#joystick3::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  bottom: 5px;
+  right: 5px;
+  color: black;
+  background-image: linear-gradient(45deg, currentColor 15%, transparent 0, transparent 85%, currentColor 0), linear-gradient(135deg, currentColor 15%, transparent 0, transparent 85%, currentColor 0), radial-gradient(currentColor 35%, transparent 36%);
+}
+
+/* Not important */
+body {
+  background: #444;
+  color: #eee;
+  font-family: sans-serif;
+}
+body a {
+  color: skyblue;
+}
+
+.CodeMirror {
+  margin-bottom: 1em;
+  font-size: 1.2em;
+}
