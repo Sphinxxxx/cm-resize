@@ -1,0 +1,43 @@
+{
+  "name": "cm-resize",
+  "version": "0.2.0",
+  "description": "Add a resize handle to your CodeMirror editor.",
+  "author": "Andreas Borgen (https://github.com/Sphinxxxx)",
+  "homepage": "https://github.com/Sphinxxxx/cm-resize",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sphinxxxx/cm-resize.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sphinxxxx/cm-resize/issues"
+  },
+  "main": "dist/cm-resize.js",
+  "module": "src/cm-resize.js",
+  "files": [
+    "src/",
+    "dist/"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "gulp": "^4.0.0",
+    "gulp-file": "^0.4.0",
+    "gulp-header": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
+    "gulp-strip-comments": "^2.5.2",
+    "gulp-uglify": "^3.0.0",
+    "node-sass": "^4.8.3",
+    "rollup": "^0.56.2",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-node-resolve": "^3.0.3"
+  },
+  "dependencies": {
+    "drag-tracker": "^0.4.3"
+  }
+}

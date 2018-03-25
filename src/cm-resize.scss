@@ -1,0 +1,13 @@
+.cm-resize-handle {
+    display:  block;
+    position: absolute;
+    bottom:0; right:0;
+    z-index: 99;
+
+    width:  18px;
+    height: 18px;
+
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0,0 16,16'%3E%3Cpath stroke='gray' stroke-width='2' d='M-1,12 l18,-18 M-1,18 l18,-18 M-1,24 l18,-18 M-1,30 l18,-18'/%3E%3C/svg%3E") center/cover;
+    box-shadow: inset -1px -1px 0 0 silver;
+    cursor: nwse-resize;
+}

@@ -1,73 +1,56 @@
+import dragTracker from 'drag-tracker';
+
+
+/* Inlined resize handle CSS */
+document.documentElement.firstElementChild //<head>, or <body> if there is no <head>
+    .appendChild(document.createElement('style')).textContent = '## PLACEHOLDER-CSS ##';
+
+
 function cmResize(cm, config) {
     config = config || {};
 
     const minW = config.minWidth  || 200,
           minH = config.minHeight || 100,
           resizeW = (config.resizableWidth  !== false),
-          resizeH = (config.resizableHeight !== false);
+          resizeH = (config.resizableHeight !== false),
+          css = config.cssClass || 'cm-resize-handle';
 
     const cmElement = cm.display.wrapper,
           cmHandle = config.handle || (function() {
               const h = cmElement.appendChild(document.createElement('div'));
-              h.className = 'cm-drag-handle';
-              h.style = ''
-                  + 'position: absolute;'
-                  + 'bottom:0; right:0;'
-                  + 'z-index: 999;'
-                  + 'width:15px; height:15px;'
-                  + 'cursor: pointer;'
-                  + 'color: gray;'
-                  + 'background: repeating-linear-gradient(135deg, transparent, transparent 2px, currentColor 0, currentColor 4px);'
-              ;
+              h.className = css;
               return h;
           })();
 
-    let startX, startY,
-        startW, startH;
-    
-    function isLeftButton(e) {
-        //https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
-        return (e.buttons !== undefined)
-                    ? (e.buttons === 1)
-                    : (e.which === 1) /* Safari (not tested) */;
-    }
+    let startPos, startSize;
+    dragTracker({
+        //Might be a different parent container if we were given a custom handler element..
+        //  container: cmElement,
+        container: cmElement.offsetParent,
+        selector: cmHandle,
 
-    function onDrag(e) {
-        if(!isLeftButton(e)) {
-            //Mouseup outside of window:
-            onRelease(e);
-            return;
-        }
-        e.preventDefault();
-        
-        const w = resizeW ? Math.max(minW, (startW + e.clientX - startX)) : null,
-              h = resizeH ? Math.max(minH, (startH + e.clientY - startY)) : null;
-        cm.setSize(w, h);
-        
-        //Leave room for our default drag handle when only one scrollbar is visible:
-        if(!config.handle) {
-            cmElement.querySelector('.CodeMirror-vscrollbar').style.bottom = '15px';
-            cmElement.querySelector('.CodeMirror-hscrollbar').style.right = '15px';
-        }
-    }
+        callbackDragStart: (handle, pos) => {
+            startPos = pos;
+            startSize = [cmElement.clientWidth, cmElement.clientHeight];
+        },
+        callback: (handle, pos) => {
+            const diffX = pos[0] - startPos[0],
+                  diffY = pos[1] - startPos[1],
+                  cw = resizeW ? Math.max(minW, startSize[0] + diffX) : null,
+                  ch = resizeH ? Math.max(minH, startSize[1] + diffY) : null;
 
-    function onRelease(e) {
-        e.preventDefault();
-        
-        window.removeEventListener("mousemove", onDrag);
-        window.removeEventListener("mouseup", onRelease);
-    }
-
-    cmHandle.addEventListener("mousedown", function (e) {
-        if(!isLeftButton(e)) { return; }
-        e.preventDefault();
-        
-        startX = e.clientX;
-        startY = e.clientY;
-        startH = cmElement.offsetHeight;
-        startW = cmElement.offsetWidth;
-
-        window.addEventListener("mousemove", onDrag);
-        window.addEventListener("mouseup", onRelease);
+            cm.setSize(cw, ch);
+            
+            //Leave room for our default handle when only one scrollbar is visible:
+            if(!config.handle) {
+                cmElement.querySelector('.CodeMirror-vscrollbar').style.bottom ='18px';
+                cmElement.querySelector('.CodeMirror-hscrollbar').style.right = '18px';
+            }
+        },
     });
+
+    return cmHandle;
 }
+
+
+export default cmResize;
