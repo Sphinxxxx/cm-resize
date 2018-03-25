@@ -26,7 +26,7 @@ function cmResize(cm, config) {
     dragTracker({
         //Might be a different parent container if we were given a custom handler element..
         //  container: cmElement,
-        container: cmElement.offsetParent,
+        container: cmHandle.offsetParent,
         selector: cmHandle,
 
         callbackDragStart: (handle, pos) => {

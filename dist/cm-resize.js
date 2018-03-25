@@ -1,5 +1,5 @@
 /*!
- * cm-resize v0.2.0
+ * cm-resize v0.2.1
  * https://github.com/Sphinxxxx/cm-resize
  *
  * Copyright 2017-2018 Andreas Borgen (https://github.com/Sphinxxxx)
@@ -226,7 +226,7 @@ function cmResize(cm, config) {
     var startPos = void 0,
         startSize = void 0;
     dragTracker({
-        container: cmElement.offsetParent,
+        container: cmHandle.offsetParent,
         selector: cmHandle,
 
         callbackDragStart: function callbackDragStart(handle, pos) {
