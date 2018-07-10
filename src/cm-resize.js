@@ -22,6 +22,23 @@ function cmResize(cm, config) {
               return h;
           })();
 
+
+    //We need to leave room for our default handle when only one scrollbar is visible.
+    //The UI should be built by now: https://github.com/codemirror/CodeMirror/issues/798
+    const vScroll = cmElement.querySelector('.CodeMirror-vscrollbar'),
+          hScroll = cmElement.querySelector('.CodeMirror-hscrollbar');
+    function constrainScrollbars() {
+        if(!config.handle) {
+            vScroll.style.bottom ='18px';
+            hScroll.style.right = '18px';
+        }
+    }
+    //Catches all cases where scrollbars may (re)appear: Resizer dragging, editing and screen resizing:
+    cm.on('update', constrainScrollbars);
+    //Needed if scrollbars are present from the start:
+    constrainScrollbars();
+
+
     let startPos, startSize;
     dragTracker({
         //Might be a different parent container if we were given a custom handler element..
@@ -40,12 +57,8 @@ function cmResize(cm, config) {
                   ch = resizeH ? Math.max(minH, startSize[1] + diffY) : null;
 
             cm.setSize(cw, ch);
-            
-            //Leave room for our default handle when only one scrollbar is visible:
-            if(!config.handle) {
-                cmElement.querySelector('.CodeMirror-vscrollbar').style.bottom ='18px';
-                cmElement.querySelector('.CodeMirror-hscrollbar').style.right = '18px';
-            }
+            //Handled by CM's 'update' event above..
+            //  constrainScrollbars();
         },
     });
 

@@ -1,5 +1,5 @@
 /*!
- * cm-resize v0.2.2
+ * cm-resize v1.0.0
  * https://github.com/Sphinxxxx/cm-resize
  *
  * Copyright 2017-2018 Andreas Borgen (https://github.com/Sphinxxxx)
@@ -223,6 +223,17 @@ function cmResize(cm, config) {
         return h;
     }();
 
+    var vScroll = cmElement.querySelector('.CodeMirror-vscrollbar'),
+        hScroll = cmElement.querySelector('.CodeMirror-hscrollbar');
+    function constrainScrollbars() {
+        if (!config.handle) {
+            vScroll.style.bottom = '18px';
+            hScroll.style.right = '18px';
+        }
+    }
+    cm.on('update', constrainScrollbars);
+    constrainScrollbars();
+
     var startPos = void 0,
         startSize = void 0;
     dragTracker({
@@ -240,11 +251,6 @@ function cmResize(cm, config) {
                 ch = resizeH ? Math.max(minH, startSize[1] + diffY) : null;
 
             cm.setSize(cw, ch);
-
-            if (!config.handle) {
-                cmElement.querySelector('.CodeMirror-vscrollbar').style.bottom = '18px';
-                cmElement.querySelector('.CodeMirror-hscrollbar').style.right = '18px';
-            }
         }
     });
 

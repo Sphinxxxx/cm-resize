@@ -3,7 +3,7 @@ PACKAGE_VERSION=$(node -p "require('./package.json').version")
 
 
 # https://stackoverflow.com/questions/18544359/how-to-read-user-input-into-a-variable-in-bash
-read -p "Push to git? Enter commit/tag message (leave blank to cancel): " commit
+read -p "v$PACKAGE_VERSION - push to git? Enter commit/tag message (leave blank to cancel): " commit
 
 # https://stackoverflow.com/questions/6482377/check-existence-of-input-argument-in-a-bash-shell-script
 if [ ! -z "$commit" ]
@@ -16,6 +16,4 @@ if [ ! -z "$commit" ]
     # https://stackoverflow.com/questions/35221147/what-is-the-sequence-for-tagging-commit-in-git
     git tag -a "v$PACKAGE_VERSION" -m "$commit"
     git push --follow-tags
-
-    # echo "Now, create a GitHub release for v$PACKAGE_VERSION :)"
 fi

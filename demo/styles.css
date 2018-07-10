@@ -77,6 +77,10 @@ body {
   background: #444;
   color: #eee;
   font-family: sans-serif;
+
+  max-width: 800px;
+  margin: auto;
+  padding: 0 1em;
 }
 body a {
   color: skyblue;
