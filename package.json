@@ -1,6 +1,6 @@
 {
   "name": "cm-resize",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Add a resize handle to your CodeMirror editor.",
   "author": "Andreas Borgen (https://github.com/Sphinxxxx)",
   "homepage": "https://github.com/Sphinxxxx/cm-resize",
@@ -13,6 +13,7 @@
     "url": "https://github.com/Sphinxxxx/cm-resize/issues"
   },
   "main": "dist/cm-resize.js",
+  "unpkg": "dist/cm-resize.min.js",
   "module": "src/cm-resize.js",
   "files": [
     "src/",
